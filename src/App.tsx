@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<List />} />
-        <Route path="/show-detail" element={<Detail />} />
+        <Route path="/show-detail/:imdbID" element={<Detail />} />
       </Routes>
     </Router>
   );

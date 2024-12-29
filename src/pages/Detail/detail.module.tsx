@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Card, CardContent, CardMedia } from "@mui/material";
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { useSelector } from "react-redux";
@@ -6,15 +7,15 @@ import { RootState } from "../../redux/store";
 
 export const Detail: React.FC = () => {
   const selectedMovie = useSelector((state: RootState) => state.movie.selectedMovie);
+  const { imdbID } = useParams();
   const [details, setDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (selectedMovie) {
       const fetchDetails = async () => {
         try {
           const response = await fetch(
-            `http://www.omdbapi.com/?apikey=21a510c3&i=${selectedMovie?.imdbID}`
+            `http://www.omdbapi.com/?apikey=21a510c3&i=${selectedMovie ? selectedMovie.imdbID : imdbID}`
           );
           const data = await response.json();
           if (data.Response === "True") {
@@ -30,8 +31,7 @@ export const Detail: React.FC = () => {
       };
 
       fetchDetails();
-    }
-  }, [selectedMovie]);
+  }, []);
 
   if (loading) {
     return (

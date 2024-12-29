@@ -111,7 +111,7 @@ export const List: React.FC = () => {
 
   const handleMovieClick = (movie: any) => {
     dispatch(setSelectedMovie(movie));
-    navigate(`/show-detail`);
+    navigate(`/show-detail/${movie.imdbID}`);
   };
 
   const open = Boolean(anchorEl);
